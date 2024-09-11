@@ -4,8 +4,14 @@ info:
   description: OpenAPI v3 specs for VAmPI
   version: '0.1'
 servers:
-  - url: http://localhost:5002
-components: {}
+  - url: https://localhost:5000
+components: 
+  securitySchemes:
+    access-token:
+      type: apiKey
+      name: auth_token
+      description: Most operations need to pass a user token retrieved calling /api/login
+      in: header
 paths:
   /createdb:
     get:
@@ -522,6 +528,8 @@ paths:
                   message:
                     type: string
                     example: 'Invalid Token'
+      security:
+        - access-token: []
   /books/v1/{book_title}:
     get:
       tags:
